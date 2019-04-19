@@ -3,7 +3,7 @@
 <header>
 <title>REGISTER PAGE</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </header>
@@ -87,7 +87,7 @@
                       <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                     </div>");
           }
-          else if ($_POST['pwd']==""|| $_POST['pwd2']==""||$_POST["user"]==""||$_POST["name"]==""||$answer = $_POST["answer"]==""){
+          else if ($_POST['pwd1']==""|| $_POST['pwd2']==""||$_POST["user"]==""||$_POST["name"]==""||$answer = $_POST["answer"]==""){
               echo("<div class='alert alert-danger alert-dismissible' role='alert' >Fields cannot be empty.
                       <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                     </div");
@@ -100,7 +100,7 @@
                 $question = $_POST["question"];
                 $answer = $_POST["answer"];
 
-                $sql = "INSERT INTO user_login (name, email, username, pwd1, pwd2, question, answer) VALUES ('$name','$email','$user','$pwd','$pwd2', $question, '$answer')";
+                $sql = "INSERT INTO user_login (name, email, username, pwd1, pwd2, question, answer) VALUES ('$name','$email','$user','$pwd1','$pwd2', $question, '$answer')";
 
                 if ($conn -> query($sql) === TRUE){
                   echo "<div class='alert alert-success alert-dismissible' role='alert'>Register Complete.
