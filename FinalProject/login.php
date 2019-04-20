@@ -59,15 +59,16 @@
                   $username = $_POST["user"];
                   $password = $_POST["pwd"];
 
-                  $sql = "SELECT name FROM user_login WHERE username = '$username' AND pwd1 = '$password'";
+                  $sql = "SELECT name, username FROM user_login WHERE username = '$username' AND pwd1 = '$password'";
 
                   $result = $conn->query($sql);
 
                   if ($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
                         //Session variable is global so it can reused in another page after the function session_start()
-                        $_SESSION["mainName"] = $row["name"];
-                        header("location: welcome.php");
+                        $_SESSION["name"] = $row["name"];
+						$_SESSION["user"] = $row["username"];
+                        header("location: index.php");
                     }
                   } else {
                     echo '<div class="alert alert-danger alert-dismissible" role="alert">Oops! Username or Password is Invalid!

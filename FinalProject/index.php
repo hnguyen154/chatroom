@@ -61,6 +61,8 @@ angular.module('chat').constant('config', {
 <script>
 chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 
+	Messages.user({id:'<?php session_start(); include("config.php"); echo $_SESSION["user"]?>', name:'<?php echo $_SESSION["name"]?>'});
+	
     // Message Inbox
     $scope.messages = [];
 
@@ -73,7 +75,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
     $scope.send = function() {
 
         var message = { 
-            to: 'support-agent',
+            to: '', //Currently empty, but should be configured with an angular variable that holds the receivers user.id.
             data: $scope.textbox ,
             user: Messages.user()
         }; 
@@ -92,11 +94,12 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
-				<h4>Users</h4>
+				<h4><?php echo $_SESSION["user"]?>'s Available Chats:</h4>
 				<ul>
-					<li>User #1</li>
-					<li>User #2</li>
-					<li>User #3</li>
+					<?php
+						//PHP Array call to user list to create an array of users in the database.
+					?>
+					<li>The users go here.</li>
 				</ul><br>
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search Blog..">
@@ -109,8 +112,9 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			</div>
 			<div class="col-sm-9">
 				<div ng-app="BasicChat">
+				
 					<div ng-controller="chat">
-						<h1>Chat with support</h1>
+						<h1>{{message.user.id}}</h1>
 						<p>Open admin.php to see admin interface.</p>
 						<div ng-repeat="message in messages">
 							<strong>{{message.user.name}}:</strong>
