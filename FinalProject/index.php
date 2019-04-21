@@ -38,6 +38,33 @@
       }
       .row.content {height: auto;}
     }
+
+    /*style for active user and search engine */
+    #thisInput {
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        margin-bottom: 12px; /* Add some space below the input */
+      }
+
+      #thisTable {
+        border-collapse: collapse; /* Collapse borders */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 14px; /* Increase font-size */
+      }
+
+      #thisTable th, #thisTable td {
+        text-align: left; /* Left-align text */
+        padding: 12px; /* Add padding */
+      }
+
+      #thisTable tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+      }
+
+      #header, #thisTable tr:hover {
+       background-color: #A9A9A9;
+      }
 </style>
 
 <!-- configuration -->
@@ -109,31 +136,51 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 	<div ng-app="BasicChat" ng-controller="chat" class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
-				<br>
-				<a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
-				<br>
-				<h4><?php echo strtoupper($_SESSION["name"])?>'s Available Chats:</h4>
+        <br>
+        <a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
+        <br>
+        <h4><?php echo strtoupper($_SESSION["name"])?>'s Available Chats:</h4>
 
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search..">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</div>
+        <div class="input-group">
+					<input type="text" id="thisInput" class="form-control" onkeyup="filter()" placeholder="Search..">
+  				
+        </div>
+
+        <script>
+          function filter() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("thisInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("thisTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
+            }
+          }
+          </script>
+
 
 				<form>
 				<?php
 					include("config.php");
-				      echo "<table class='table'>
-					    <thead class='thead-light'>
-					      <tr>
-						<th scope='col'></th>
-						<th scope='col'>Name</th>
-					      </tr>
-					    </thead>
-					    <tbody>";
+              echo "<table id='thisTable' class='table'>
+                    <thead id='header' class='thead-light'>
+                      <tr>
+                        <th scope='col'></th>
+                        <th scope='col'>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>";
     					$sql = "SELECT user, name FROM user_session WHERE status = 0";
     					$result = $conn->query($sql);
     					//  $nameList = array();
@@ -144,24 +191,24 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
     					}else {
     						echo "No one is online.<br>" . $conn->error;
     					}
-				      echo "</tbody>
-					    </table>";
-				      session_start();
-				      if(isset($_SESSION["name"]))
-				      {
-					   if((time() - $_SESSION['last_login_timestamp']) > 60) // 900 = 15 * 60
-					   {
-						header("location:logout.php");
-					   }
-					   else
-					   {
-						$_SESSION['last_login_timestamp'] = time();
-					   }
-				      }
-				      else
-				      {
-					   header('location:login.php');
-				      }
+              echo "</tbody>
+                    </table>";
+              session_start();
+              if(isset($_SESSION["name"]))
+              {
+                   if((time() - $_SESSION['last_login_timestamp']) > 60) // 900 = 15 * 60
+                   {
+                        header("location:logout.php");
+                   }
+                   else
+                   {
+                        $_SESSION['last_login_timestamp'] = time();
+                   }
+              }
+              else
+              {
+                   header('location:login.php');
+              }
 
 				?>
 				</form><br>
@@ -169,7 +216,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			</div>
 			<div class="col-sm-9">
 				<div>
-					<h1>Your chats:</h1>
+					<h1>CHAT HERE:</h1>
 					<div ng-repeat="message in messages">
 						<strong>{{message.user.name}}:</strong>
 						<span>{{message.data}}</span>

@@ -6,7 +6,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+      .btn{
 
+        }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -69,6 +73,7 @@
                         //Session variable is global so it can reused in another page after the function session_start()
                         $_SESSION["name"] = $row["name"];
 						            $_SESSION["user"] = $row["username"];
+                        $_SESSION['last_login_timestamp'] = time();
 
                         $name = $_SESSION["name"];
                         //insert into second table
