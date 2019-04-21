@@ -42,8 +42,6 @@
     /*style for active user and search engine */
     #thisInput {
         font-size: 16px; /* Increase font-size */
-        padding: 12px 20px 12px 40px; /* Add some padding */
-        margin-bottom: 12px; /* Add some space below the input */
       }
 
       #thisTable {
@@ -64,6 +62,17 @@
 
       #header, #thisTable tr:hover {
        background-color: #A9A9A9;
+      }
+      #textBox{
+        bottom:0;
+        height:15%;
+        position: fixed;
+        outline:none;
+        resize: none;
+
+        border:none;
+        border-bottom:#000 medium solid !important;
+
       }
 </style>
 
@@ -143,7 +152,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 
         <div class="input-group">
 					<input type="text" id="thisInput" class="form-control" onkeyup="filter()" placeholder="Search..">
-  				
+
         </div>
 
         <script>
@@ -222,8 +231,10 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 						<span>{{message.data}}</span>
 					</div>
 					<form ng-submit="send()">
-						<input ng-model="textbox">
-					</form>
+            <div class="form-group">
+						  <input class="form-control" ng-model="textbox" placeholder="Type your message here..." id="textBox" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            </div>
+	        </form>
 				</div>
 			</div>
 		</div>
@@ -233,9 +244,5 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 
 </body>
 
-<footer class="container-fluid">
-	<p>Footer Text</p>
-
-</footer>
 
 </html>
