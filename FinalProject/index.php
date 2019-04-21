@@ -14,20 +14,59 @@
 </header>
 
 <style>
+    body {
+        width: 100wh;
+        height: 90vh;
+        color: #fff;
+        background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+        background-size: 400% 400%;
+        -webkit-animation: Gradient 15s ease infinite;
+        -moz-animation: Gradient 15s ease infinite;
+        animation: Gradient 15s ease infinite;
+        }
+
+        @-webkit-keyframes Gradient {
+        0% {
+        background-position: 0% 50%
+        }
+        50% {
+        background-position: 100% 50%
+        }
+        100% {
+        background-position: 0% 50%
+        }
+        }
+
+        @-moz-keyframes Gradient {
+        0% {
+        background-position: 0% 50%
+        }
+        50% {
+        background-position: 100% 50%
+        }
+        100% {
+        background-position: 0% 50%
+        }
+        }
+
+        @keyframes Gradient {
+        0% {
+        background-position: 0% 50%
+        }
+        50% {
+        background-position: 100% 50%
+        }
+        100% {
+        background-position: 0% 50%
+        }
+    }
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
 
     /* Set gray background color and 100% height */
     .sidenav {
-      background-color: #f1f1f1;
+      background-color: #1E90FF;
       height: 100%;
-    }
-
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
     }
 
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -61,7 +100,7 @@
       }
 
       #header, #thisTable tr:hover {
-       background-color: #A9A9A9;
+       background-color: #47b6ff;
       }
       #textBox{
         bottom:0;
