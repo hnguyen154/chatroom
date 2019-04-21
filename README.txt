@@ -18,6 +18,9 @@ sessionDate DATETIME);
 //Delete the sessionDate colume in putty or terminal
 ALTER TABLE user_session DROP COLUMN sessionDate;
 
+//User in table 2 won't repeat twice
+ALTER TABLE user_session ADD PRIMARY KEY (user);
+
 //THIS TABLE IS FOR ANGULARJS
 CREATE TABLE chatUser(
 name VARCHAR(250) NOT NULL PRIMARY KEY, 
