@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group" align="center">
                       <div class="col-sm-offset-2 col-sm-10">
-                          <input type="submit" name="forgot" class="btn btn-primary" value="Submit" />
+                          <input type="submit" name="forgot" class="btn btn-primary" value="Submit" data-toggle="modal" data-target="#pass" />
                           <br />
                           <a href="login.php"><input type="button" name="login" class="btn btn-primary btn-link" value="Login" /></a>
                         </div>
@@ -66,23 +66,25 @@
         include("config.php");
 
         if(isset($_POST['forgot'])){
-            if ($_POST["user"]==""||$_POST['ans']==""){
-              echo("<div class='alert alert-dangeralert-dismissible' role='alert' >Fields cannot be empty.
+            if ($_POST["email"]==""||$_POST["user"]==""||$_POST['answer']==""){
+              echo("<div class='alert alert-danger alert-dismissible' role='alert' >Fields cannot be empty.
                         <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                     </div>");
             } else {
                 $email = $_POST["email"];
                 $username = $_POST["user"];
-                $question = $_POST["ques"];
-                $answer = $_POST["ans"];
+                $question = $_POST["question"];
+                $answer = $_POST["answer"];
 
-                $sql = "SELECT password FROM user_login WHERE email = '$email' AND username = '$username' AND question = $question AND answer = '$answer'";
+                $sql = "SELECT pwd1 FROM user_login WHERE email = '$email' AND username = '$username' AND question = $question AND answer = '$answer'";
 
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0){
                   while($row = $result->fetch_assoc()){
-                      echo "<div class='alert alert-primary' role='alert' alert-dismissible>" . $row["password"]. "</div>";
+                      echo "<div class='alert alert-primary alert-dismissible' role='alert' >" . $row['pwd1'] .
+                      "<a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                      </div>";
                   }
                 } else {
                   echo "<div class='alert alert-danger alert-dismissible' role='alert'>Field is Invalid!
