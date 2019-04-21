@@ -109,50 +109,63 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 	<div ng-app="BasicChat" ng-controller="chat" class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
-        <a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
-				<h4><?php echo $_SESSION["name"]?>'s Available Chats:</h4>
-				<form>
-				<?php
-					include("config.php");
+				<br>
+				<a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
+				<br>
+				<h4><?php echo strtoupper($_SESSION["name"])?>'s Available Chats:</h4>
 
-    					$sql = "SELECT user, name FROM user_session WHERE status = 0";
-    					$result = $conn->query($sql);
-    					//  $nameList = array();
-    					if ($result->num_rows > 0){
-    						while ($row = $result->fetch_assoc()) {
-    							echo "<input type='radio' ng-model='value' value='" . $row["user"] . "'>" . $row["name"] . "<br>";
-    						}
-    					}else {
-    						echo "No one is online.<br>" . $conn->error;
-    					}
-
-              session_start();
-              if(isset($_SESSION["name"]))
-              {
-                   if((time() - $_SESSION['last_login_timestamp']) > 60) // 900 = 15 * 60
-                   {
-                        header("location:logout.php");
-                   }
-                   else
-                   {
-                        $_SESSION['last_login_timestamp'] = time();
-                   }
-              }
-              else
-              {
-                   header('location:login.php');
-              }
-
-				?>
-				</form><br>
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search Blog..">
+					<input type="text" class="form-control" placeholder="Search..">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</span>
 				</div>
+
+				<form>
+				<?php
+					include("config.php");
+				      echo "<table class='table'>
+					    <thead class='thead-light'>
+					      <tr>
+						<th scope='col'></th>
+						<th scope='col'>Name</th>
+					      </tr>
+					    </thead>
+					    <tbody>";
+    					$sql = "SELECT user, name FROM user_session WHERE status = 0";
+    					$result = $conn->query($sql);
+    					//  $nameList = array();
+    					if ($result->num_rows > 0){
+    						while ($row = $result->fetch_assoc()) {
+    							echo "<tr><th scope='row'><input type='radio' ng-model='value' value='" . $row["user"] . "'></th><td>" . $row["name"] . "</td></tr><br>";
+    						}
+    					}else {
+    						echo "No one is online.<br>" . $conn->error;
+    					}
+				      echo "</tbody>
+					    </table>";
+				      session_start();
+				      if(isset($_SESSION["name"]))
+				      {
+					   if((time() - $_SESSION['last_login_timestamp']) > 60) // 900 = 15 * 60
+					   {
+						header("location:logout.php");
+					   }
+					   else
+					   {
+						$_SESSION['last_login_timestamp'] = time();
+					   }
+				      }
+				      else
+				      {
+					   header('location:login.php');
+				      }
+
+				?>
+				</form><br>
+
 			</div>
 			<div class="col-sm-9">
 				<div>
