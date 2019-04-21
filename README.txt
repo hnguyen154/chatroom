@@ -15,7 +15,8 @@ user VARCHAR(250) NOT NULL,
 status INT NOT NULL,
 sessionDate DATETIME);
 
-
+//Delete the sessionDate colume in putty or terminal
+ALTER TABLE user_session DROP COLUMN sessionDate;
 
 //THIS TABLE IS FOR ANGULARJS
 CREATE TABLE chatUser(
