@@ -16,27 +16,27 @@
 <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
-    
+
     /* Set gray background color and 100% height */
     .sidenav {
       background-color: #f1f1f1;
       height: 100%;
     }
-    
+
     /* Set black background color, white text and some padding */
     footer {
       background-color: #555;
       color: white;
       padding: 15px;
     }
-    
+
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
         padding: 15px;
       }
-      .row.content {height: auto;} 
+      .row.content {height: auto;}
     }
 </style>
 
@@ -62,7 +62,7 @@ angular.module('chat').constant('config', {
 chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 
 	Messages.user({id:'<?php session_start(); include("config.php"); echo $_SESSION["user"]?>', name:'<?php echo $_SESSION["name"]?>'});
-	
+
     // Message Inbox
     $scope.messages = [];
 
@@ -74,11 +74,11 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
     // Send Messages
     $scope.send = function() {
 
-        var message = { 
+        var message = {
             to: '', //Currently empty, but should be configured with an angular variable that holds the receivers user.id.
             data: $scope.textbox ,
             user: Messages.user()
-        }; 
+        };
 
         Messages.send(message);
 
@@ -91,14 +91,33 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 
 <!-- view -->
 <body>
+  <?php
+  if (empty($_SESSION['user'])) {
+     header('Location: login.php');
+     exit;
+  }
+?>
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
 				<h4><?php echo $_SESSION["user"]?>'s Available Chats:</h4>
 				<ul>
-					<?php
-						//PHP Array call to user list to create an array of users in the database.
-					?>
+          <?php
+              include("config.php");
+
+              $sql = "SELECT user FROM user_session WHERE status = 0";
+              $result = $conn->query($sql);
+            //  $nameList = array();
+              if ($result->num_rows > 0){
+                while ($row = $result->fetch_assoc()) {
+                    echo "<li>" . $row["user"] . "</li>";
+                }
+              }else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+              }
+
+
+          ?>
 					<li>The users go here.</li>
 				</ul><br>
 				<div class="input-group">
@@ -112,7 +131,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			</div>
 			<div class="col-sm-9">
 				<div ng-app="BasicChat">
-				
+
 					<div ng-controller="chat">
 						<h1>{{message.user.id}}</h1>
 						<p>Open admin.php to see admin interface.</p>
@@ -128,10 +147,16 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			</div>
 		</div>
 	</div>
+
+  <a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
+
+
+
 </body>
 
 <footer class="container-fluid">
 	<p>Footer Text</p>
+
 </footer>
 
 </html>

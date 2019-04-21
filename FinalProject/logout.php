@@ -1,8 +1,15 @@
 <?php
 	session_start();
-	session_destroy();
-	unset($_SESSION['username']);
-	$_SESSION['message'] = "You are not logged out";
-	header("location: login.php");
+	include("config.php");
+	$name = $_SESSION["name"];
+	$sql = "UPDATE user_session SET status = 1 WHERE name = '$name'";
+
+	if ($conn -> query($sql) === TRUE){
+		unset($name);
+		session_destroy();
+		header("location: login.php");
+	} else {
+		echo $conn->error;
+	}
 
 ?>

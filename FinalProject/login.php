@@ -14,7 +14,6 @@
           <h1 align="center">Welcome to CSC 4370 Chatroom</h1>
         </div>
 
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title" align="center">Login to Chat</h3>
@@ -59,6 +58,7 @@
                   $username = $_POST["user"];
                   $password = $_POST["pwd"];
 
+
                   $sql = "SELECT name, username FROM user_login WHERE username = '$username' AND pwd1 = '$password'";
 
                   $result = $conn->query($sql);
@@ -67,7 +67,32 @@
                     while($row = $result->fetch_assoc()){
                         //Session variable is global so it can reused in another page after the function session_start()
                         $_SESSION["name"] = $row["name"];
-						$_SESSION["user"] = $row["username"];
+						            $_SESSION["user"] = $row["username"];
+
+                        $name = $_SESSION["name"];
+                        //insert into second table
+                        $query = "SELECT user FROM user_session";
+                        $result2 = $conn->query($query);
+                        $status = 0;
+                        if($result2->num_rows > 0)
+                        {
+                          while($row = $result2->fetch_assoc()){
+                            //If the name is already in table 2, just update
+                            $uname = $row["user"];
+                          }
+                          if ($uname != $username){
+                            $sql3 = "INSERT INTO user_session (name, user, status) VALUES ('$name','$username', $status)";
+                            $conn -> query($sql3);
+                          }else{
+                            $sql2 = "UPDATE user_session SET status = $status WHERE user='$username'";
+                            $conn -> query($sql2);
+                          }
+                        } else{
+                          echo $conn->error;
+                        }
+
+
+
                         header("location: index.php");
                     }
                   } else {
