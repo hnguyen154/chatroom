@@ -100,6 +100,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
+        <a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
 				<h4><?php echo $_SESSION["user"]?>'s Available Chats:</h4>
 				<ul>
           <?php
@@ -113,7 +114,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
                     echo "<li>" . $row["user"] . "</li>";
                 }
               }else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "No one is online.<br>" . $conn->error;
               }
 
 
@@ -147,8 +148,6 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			</div>
 		</div>
 	</div>
-
-  <a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
 
 
 

@@ -77,18 +77,21 @@
                         if($result2->num_rows > 0)
                         {
                           while($row = $result2->fetch_assoc()){
-                            //If the name is already in table 2, just update
                             $uname = $row["user"];
                           }
                           if ($uname != $username){
+                            //If the name is not in table 2, just update
                             $sql3 = "INSERT INTO user_session (name, user, status) VALUES ('$name','$username', $status)";
                             $conn -> query($sql3);
                           }else{
+                            //If the name is already in table 2, just update
                             $sql2 = "UPDATE user_session SET status = $status WHERE user='$username'";
                             $conn -> query($sql2);
                           }
                         } else{
-                          echo $conn->error;
+                          //If the table is empty, just update
+                          $sql3 = "INSERT INTO user_session (name, user, status) VALUES ('$name','$username', $status)";
+                          $conn -> query($sql3);
                         }
 
 
