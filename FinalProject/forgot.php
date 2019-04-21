@@ -82,10 +82,9 @@
 
                 if ($result->num_rows > 0){
                   while($row = $result->fetch_assoc()){
-                      echo "<div class='alert alert-primary alert-dismissible' role='alert' >" . $row['pwd1'] .
-                      "<a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                      </div>";
+                      $yourpass = $row['pwd1'];
                   }
+                  echo "<div class='alert alert-primary' role='alert' style='text-align:center'> $yourpass </div>";
                 } else {
                   echo "<div class='alert alert-danger alert-dismissible' role='alert'>Field is Invalid!
                           <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
