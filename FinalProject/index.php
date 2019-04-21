@@ -86,9 +86,9 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
         $scope.messages.push(message);
 
     };
-	
+
 	$scope.value= '';
-    
+
     $scope.$watch('value', function(value) {
        console.log(value);
 	   $scope.sendTo.userid = value;
@@ -104,6 +104,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			header('Location: login.php');
 			exit;
 		}
+
 	?>
 	<div ng-app="BasicChat" ng-controller="chat" class="container-fluid">
 		<div class="row content">
@@ -114,16 +115,34 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 				<?php
 					include("config.php");
 
-					$sql = "SELECT user, name FROM user_session WHERE status = 0";
-					$result = $conn->query($sql);
-					//  $nameList = array();
-					if ($result->num_rows > 0){
-						while ($row = $result->fetch_assoc()) {
-							echo "<input type='radio' ng-model='value' value='" . $row["user"] . "'>" . $row["name"] . "<br>";
-						}
-					}else {
-						echo "No one is online.<br>" . $conn->error;
-					}
+    					$sql = "SELECT user, name FROM user_session WHERE status = 0";
+    					$result = $conn->query($sql);
+    					//  $nameList = array();
+    					if ($result->num_rows > 0){
+    						while ($row = $result->fetch_assoc()) {
+    							echo "<input type='radio' ng-model='value' value='" . $row["user"] . "'>" . $row["name"] . "<br>";
+    						}
+    					}else {
+    						echo "No one is online.<br>" . $conn->error;
+    					}
+
+              session_start();
+              if(isset($_SESSION["name"]))
+              {
+                   if((time() - $_SESSION['last_login_timestamp']) > 60) // 900 = 15 * 60
+                   {
+                        header("location:logout.php");
+                   }
+                   else
+                   {
+                        $_SESSION['last_login_timestamp'] = time();
+                   }
+              }
+              else
+              {
+                   header('location:login.php');
+              }
+
 				?>
 				</form><br>
 				<div class="input-group">
