@@ -5,9 +5,16 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="bower_components/angular/angular.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </header>
-
+<style>
+  body {
+    background-color: #1E90FF;
+  }
+  h1{
+    color: white;
+  }
+</style>
 <body>
   <div class="container">
       <div class="page-header">

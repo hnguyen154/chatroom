@@ -10,7 +10,7 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/rltm/web/rltm.js"></script>
 <script src="angular-chat.js"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </header>
 
 <style>
