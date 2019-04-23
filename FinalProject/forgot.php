@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>FORGOT YOUR PASSWORD</title>]
+    <title>Forgot Your Password?</title>]
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -26,7 +26,7 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-              <h3 class="panel-title" align="center">Forgot Your Password</h3>
+              <h3 class="panel-title" align="center">Forgot Your Password?</h3>
           </div>
             <div class="panel-body">
               <form action="forgot.php" method="post" class="form-horizontal">

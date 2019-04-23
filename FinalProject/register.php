@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <header>
-<title>REGISTER PAGE</title>
+<title>Registration Page</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="bower_components/angular/angular.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

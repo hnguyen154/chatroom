@@ -159,7 +159,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
         Messages.send(message);
 
         $scope.messages.push(message);
-
+		$scope.textbox = "";
     };
 
 	$scope.value= '';
@@ -188,11 +188,6 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
         <a href='logout.php'><input type='submit' id='logout' name='logout' value='Logout'></a>
         <br>
         <h4><?php echo strtoupper($_SESSION["name"])?>'s Available Chats:</h4>
-
-        <div class="input-group">
-					<input type="text" id="thisInput" class="form-control" onkeyup="filter()" placeholder="Search..">
-
-        </div>
 
         <script>
           function filter() {
@@ -264,7 +259,7 @@ chat.controller('chat', ['Messages', '$scope', function(Messages, $scope) {
 			</div>
 			<div class="col-sm-9">
 				<div>
-					<h1>CHAT HERE:</h1>
+					<h1>Your Chat:</h1>
 					<div ng-repeat="message in messages">
 						<strong>{{message.user.name}}:</strong>
 						<span>{{message.data}}</span>

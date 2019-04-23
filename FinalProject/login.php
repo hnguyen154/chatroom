@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>LOGIN PAGE</title>
+    <title>Login Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -19,7 +19,7 @@
   <body>
     <div class="container">
         <div class="page-header">
-          <h1 align="center">Welcome to CSC 4370 Chatroom</h1>
+          <h1 align="center">Welcome to the CSC 4370 Chatroom</h1>
         </div>
 
         <div class="panel panel-default">
