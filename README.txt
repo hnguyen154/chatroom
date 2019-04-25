@@ -4,8 +4,12 @@ Compatible with any device.
 
 Thanks to PubNub (AngularJS API) for making it happen!
 
+Please ignore folders: PHP only and AngularJS Login!!
+SOURCE CODES ARE IN FINAL PROJECT FOLDER
 
-
+For testing: http://codd.cs.gsu.edu/~agould5/FinalProject/login.php
+Acct: cat     &     Acct: dog
+Pass: cat     &     Acct: dog
 
 LOGIN SYSTEM DATABASE
 
