@@ -1,3 +1,12 @@
+Free Chatroom for our classroom.
+
+Compatible with any device.
+
+Thanks to PubNub (AngularJS API) for making it happen!
+
+
+
+
 LOGIN SYSTEM DATABASE
 
 CREATE TABLE user_login(
@@ -21,10 +30,3 @@ ALTER TABLE user_session DROP COLUMN sessionDate;
 //User in table 2 won't repeat twice
 ALTER TABLE user_session ADD PRIMARY KEY (user);
 
-//THIS TABLE IS FOR ANGULARJS
-CREATE TABLE chatUser(
-name VARCHAR(250) NOT NULL PRIMARY KEY, 
-email VARCHAR(250) NOT NULL,
-password VARCHAR(250) NOT NULL, 
-question VARCHAR(250) NOT NULL, 
-answer VARCHAR(250) NOT NULL);
